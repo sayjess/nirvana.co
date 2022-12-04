@@ -1,7 +1,7 @@
 import { Outlet, Link } from "react-router-dom";
 import { Fragment } from "react";
 
-import '../../styles/navigation.scss'
+import './navigation.scss'
 
 import {ReactComponent as Logo} from '../../assets/logo.svg'
 
@@ -16,7 +16,7 @@ const Navigation = () => {
                     <Link className="nav-link" to='/shop'>
                         SHOP
                     </Link>
-                    <Link className="nav-link" to='/signin'>
+                    <Link className="nav-link" to='/auth'>
                         SIGN IN
                     </Link>
                 </div>
