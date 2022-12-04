@@ -17,6 +17,10 @@ const SignIn = () => {
     const [formData, setFormData] = useState(defaultFormData);
     const { email, password } = formData;
 
+    const setDefaultField = () => {
+        setFormData(defaultFormData)
+    }
+
     const handleChange = (event) => {
         const { name, value } = event.target
         setFormData(prevFormData => {
@@ -28,16 +32,32 @@ const SignIn = () => {
         )
     }
     const handleSubmit  = async (event) => {
-        console.log('inside handlesubmit')
         event.preventDefault();
         try{
             const response = await signInAuthWithEmailAndPassword(email, password);
             console.log(response)
-            console.log('inside handlesubmit try block')
+            setDefaultField();
         }
         catch(e){
-            alert('something went wrong', e)
-        }
+            switch(e.code){
+                case 'auth/wrong-password':
+                    alert("Invalid Credential. Please try again.");
+                    break;
+                case 'auth/user-not-found':
+                    alert('Account does not exist.')
+                    setDefaultField();
+                    break;
+                case 'auth/email-already-in-use':
+                    alert('Already signed in.')
+                    setDefaultField();
+                    break;
+                case 'auth/network-request-failed':
+                    alert('Please check your internet connection and try again.')
+                    break;
+                default:
+                    alert('something went wrong: ', e)
+            }
+        }   
     }
 
     //note: whenever we want to make a call to a database this is going to be asynchronous
@@ -68,11 +88,11 @@ const SignIn = () => {
                             onChange={handleChange}
                             value={password}
                             />
+                    <div className='btn-container'>
+                        <Button type='submit'>Sign In</Button>
+                        <Button type='button' onClick={signInWithGoogle} buttonType='google'>Google Sign In</Button>
+                    </div>
                 </form>
-                <div className='btn-container'>
-                    <Button type='submit'>Sign In</Button>
-                    <Button onClick={signInWithGoogle} buttonType='google'>Google Sign In</Button>
-                </div>
             </div>
         </div>
     );

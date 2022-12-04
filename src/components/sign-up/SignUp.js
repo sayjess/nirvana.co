@@ -33,6 +33,7 @@ const SignUp = () => {
     }
 
     const handleSubmit  = async (event) => {
+        console.log("inside handle submit for sign up form")
         event.preventDefault();
         //confirm if password matches
         if(password !== confirmPassword){
@@ -93,7 +94,7 @@ const SignUp = () => {
                     onChange={handleChange}
                     value={confirmPassword}
                     />
-                <Button type="submit">Sign In</Button>
+                <Button type="submit">Sign Up</Button>
             </form>
         </div>
     )
