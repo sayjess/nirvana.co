@@ -18,6 +18,7 @@ const SignUp = () => {
     const [formData, setFormData] = useState(defaultFormData);
     const { displayName, email, password, confirmPassword } = formData;
 
+
     const handleChange = (event) => {
         const { name, value } = event.target
         setFormData(prevFormData => {
@@ -33,7 +34,6 @@ const SignUp = () => {
     }
 
     const handleSubmit  = async (event) => {
-        console.log("inside handle submit for sign up form")
         event.preventDefault();
         //confirm if password matches
         if(password !== confirmPassword){

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState } from 'react';
 
 import { signInWithGooglePopup, createUserDocumentFromAuth, signInAuthWithEmailAndPassword } from '../../utils/firebase/firebase';
 
@@ -17,6 +17,7 @@ const SignIn = () => {
     const [formData, setFormData] = useState(defaultFormData);
     const { email, password } = formData;
 
+
     const setDefaultField = () => {
         setFormData(defaultFormData)
     }
@@ -34,8 +35,7 @@ const SignIn = () => {
     const handleSubmit  = async (event) => {
         event.preventDefault();
         try{
-            const response = await signInAuthWithEmailAndPassword(email, password);
-            console.log(response)
+            const {user} = await signInAuthWithEmailAndPassword(email, password);
             setDefaultField();
         }
         catch(e){
@@ -62,8 +62,7 @@ const SignIn = () => {
 
     //note: whenever we want to make a call to a database this is going to be asynchronous
     const signInWithGoogle = async () => {
-        const {user} = await signInWithGooglePopup();
-        await createUserDocumentFromAuth(user);
+        await signInWithGooglePopup();
     }
 
     return (
