@@ -7,14 +7,14 @@ import { useContext } from 'react'
 
 const CartIcon = () => {
 
-    const {toggleCart, setToggleCart} = useContext(Cart);
+    const {isCartOpen, setIsCartOpen, productCount} = useContext(Cart);
 
-    const toggleHandler = () => setToggleCart(!toggleCart);
+    const toggleHandler = () => setIsCartOpen(!isCartOpen);
 
     return (
         <div className='cart-icon-container' onClick={toggleHandler}>
             <ShoppingIcon className='shopping-icon'/>
-            <span className='item-count'>0</span>
+            <span className='item-count'>{productCount}</span>
         </div>
     )
 

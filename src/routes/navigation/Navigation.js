@@ -16,7 +16,7 @@ import {ReactComponent as Logo} from '../../assets/logo.svg'
 const Navigation = () => {
 
     const { currentUser } = useContext(User);
-    const { toggleCart } = useContext(Cart)
+    const { isCartOpen } = useContext(Cart)
 
     return (
         <Fragment>
@@ -35,7 +35,7 @@ const Navigation = () => {
                         <span className="nav-link" onClick={signOutUser}>Sign Out</span> }
                     <CartIcon />
                 </div>
-                {toggleCart && <CartDropdown />}
+                {isCartOpen && <CartDropdown />}
             </div>
             <Outlet />
         </Fragment>
